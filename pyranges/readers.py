@@ -439,7 +439,8 @@ def read_gtf_full(
 
 def parse_kv_fields(line):
     # rstrip: allows for GFF not having a last ";", or having final spaces
-    return [kv.replace('""', '"NA"').replace('"', "").split(None, 1) for kv in line.rstrip("; ").split("; ")]
+    if isinstance(line, str):
+        return [kv.replace('""', '"NA"').replace('"', "").split(None, 1) for kv in line.rstrip("; ").split("; ")]
 
 
 def to_rows(anno, ignore_bad: bool = False):
